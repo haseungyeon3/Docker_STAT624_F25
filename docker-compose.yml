@@ -43,7 +43,7 @@ services:
       - "8797:8797"
   Rstudio:
     container_name: Rstudio
-    image: rst:latest
+    image: rocker/rstudio:4.3
     restart: always
     environment:
       - USERNAME=rstudio
