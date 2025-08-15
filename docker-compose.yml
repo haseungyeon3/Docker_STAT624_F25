@@ -53,8 +53,7 @@ services:
       - "8787:8787"
     working_dir: /home/rstudio
     command: >
-      bash -c  "apt-get update && apt-get install -y postgresql-client && /init"
- 
+      bash -c  "apt-get update && apt-get install -y libpq-dev && /init"
 
 volumes:
   sql_scripts:
