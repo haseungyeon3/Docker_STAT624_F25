@@ -3,6 +3,10 @@ Libraries
 ---
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see .
+in terminal,  
+winpty docker exec -it {containerID} bash
+Rscript -e 'installed.packages()[,c("Package","Version")]'
+
 
 ```{r}
 library(DBI)
@@ -10,7 +14,10 @@ install.packages("RPostgres")
 library(RPostgres)
 ```
 
-Create connection
+In terminal, 
+Rscript -e 'installed.packages()[,c("Package","Version")]'
+
+2. Create connection
 
 
 ```{r}
