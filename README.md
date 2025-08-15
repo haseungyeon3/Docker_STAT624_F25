@@ -11,7 +11,7 @@
 
 ## Creating Images from Dockerfile
 1. Open your terminal in the directory containing the Dockerfile.
-2. Build the image using: `docker build temp . `
+2. Build the image using: `docker build temp . ` (if you are building postgresql image, first extract 'datadump.sql' and save it at the same directory)
 3. Tag the image for Docker Hub:`docker tag temp:latest {yourDockerHubRepo:tagname}`
 4. Push the image to Docker Hub:`docker push {yourDockerHubRepo:tagname}`
 5. If you want to use your custom image, update the docker-compose.yml file by replacing the image name with {yourDockerHubRepo:tagname}
