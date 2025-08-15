@@ -1,4 +1,4 @@
-# SQL+Python Docker Environment
+# SQL+Python+Rstudio Docker Environment
 **Description**: Dockerfiles and docker compose for SQL and Python environment for   STAT 624
 
 ## Quick start guide
