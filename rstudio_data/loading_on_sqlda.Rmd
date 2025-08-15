@@ -6,9 +6,7 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 
 ```{r}
 library(DBI)
-library(dplyr)
-library(dbplyr)
-library(RPostgreSQL)
+library(RPostgres)
 
 ```
 
@@ -16,19 +14,13 @@ library(RPostgreSQL)
 
 
 ```{r}
-
-tryCatch({
-    drv <- dbDriver("PostgreSQL")
-    con  <- dbConnect(drv, 
+con <- dbConnect(RPostgres::Postgres(),
                  dbname = 'sqlda',
-                 host = 'pg_container', 
+                 host = 'postgres', 
                  port = 5432,
                  user = 'postgres', 
                  password = 'stat1234')
-    print("Database Connected!")
-    },
-    error=function(cond) {print("Unable to connect to Database.")}
-    )
+
     
 ```
 
