@@ -2,7 +2,7 @@ version: '3.8'
 services:
   postgres:
     container_name: pg_container
-    image: seungyeonha3/s624:pqsql1.3
+    image: seungyeonha3/s624:pgsql1.1
     restart: always
     environment:
       POSTGRES_USER: postgres
@@ -10,9 +10,11 @@ services:
       POSTGRES_DATABASE: sqlda
     ports:
       - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
   pgadmin:
     container_name: pgadmin4_container
-    image: dpage/pgadmin4:8.2
+    image: dpage/pgadmin4:9.4
     restart: always
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
@@ -22,13 +24,8 @@ services:
     volumes:
       - ./db_image/servers.json:/pgadmin4/servers.json
       - ./sql_scripts:/home/sql_scripts
-      - ./my_data:/var/lib/pgadmin
     ports:
       - "5050:80"
-    entrypoint:
-      - "/bin/sh"
-      - "-c"
-      - "/bin/echo 'postgres:5432:*:postgres:stat1234' > /tmp/pgpassfile && chmod 600 /tmp/pgpassfile && /entrypoint.sh" 
     depends_on:
       - postgres
   pynb:
@@ -62,6 +59,5 @@ services:
 volumes:
   sql_scripts:
   jupyter_notebooks:
-  my_data:
+  db-data:
   rstudio-server-data: 
-    
