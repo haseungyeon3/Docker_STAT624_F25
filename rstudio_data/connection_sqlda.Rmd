@@ -1,0 +1,48 @@
+---
+Libraries
+---
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see .
+
+```{r}
+library(DBI)
+install.packages("RPostgres")
+library(RPostgres)
+```
+
+Create connection
+
+
+```{r}
+con <- dbConnect(RPostgres::Postgres(),
+                 dbname = 'sqlda',
+                 host = 'postgres', 
+                 port = 5432,
+                 user = 'postgres', 
+                 password = 'stat1234')
+
+    
+```
+Read a table
+
+```{r}
+
+temp <- dbGetQuery(con, "SELECT count(*) FROM customers Limit 2;")
+temp
+dbGetQuery(con, "SELECT count(*) FROM testtest Limit 2;")
+```
+Create a table in sqlda: 
+
+
+```{r}
+
+dbSendQuery(con, "DROP TABLE IF EXISTS testtest ")
+
+ dbSendQuery(con, "CREATE TABLE testtest(Id INTEGER PRIMARY KEY, Name VARCHAR(20))")
+ dbSendQuery(con, "INSERT INTO testtest VALUES(1,'Shawn Ha'),(2,'Allison Lee')")
+
+```
+
+
+ 
+

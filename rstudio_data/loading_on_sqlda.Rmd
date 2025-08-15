@@ -1,0 +1,60 @@
+---
+1.  Libraries
+---
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see .
+
+```{r}
+library(DBI)
+library(dplyr)
+library(dbplyr)
+library(RPostgreSQL)
+
+```
+
+2.  Create connection
+
+
+```{r}
+
+tryCatch({
+    drv <- dbDriver("PostgreSQL")
+    con  <- dbConnect(drv, 
+                 dbname = 'sqlda',
+                 host = 'pg_container', 
+                 port = 5432,
+                 user = 'postgres', 
+                 password = 'stat1234')
+    print("Database Connected!")
+    },
+    error=function(cond) {print("Unable to connect to Database.")}
+    )
+    
+```
+
+3.  Create  tables in sqlda: 
+
+
+```{r}
+subj_2016<-read.csv("~/subj_2016.csv", header=TRUE)
+dbSendQuery(con, "DROP TABLE IF EXISTS subj_2016 ")
+dbWriteTable(con,'subj_2016', subj_2016, row.names=FALSE) 
+center_2017<-read.csv("~/center_2017.csv", header=TRUE)
+dbSendQuery(con, "DROP TABLE IF EXISTS center_2017 ")
+dbWriteTable(con,'center_2017', center_2017, row.names=FALSE) 
+
+```
+
+4.  Read a table
+
+```{r}
+
+
+
+dbGetQuery(con, "SELECT count(*) FROM subj_2016 Limit 2;")
+temp <- dbGetQuery(con, "SELECT * FROM center_2017 Limit 2;")
+temp
+ 
+```
+ 
+
