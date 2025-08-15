@@ -40,24 +40,24 @@ services:
       - "8797:8797"
   Rstudio:
     container_name: Rstudio
-    image: rocker/rstudio:4.3
+    image: rocker/rstudio:4.4
     restart: always
     environment:
       - USERNAME=rstudio
       - PASSWORD=rstudio
     volumes:
-      - ./rstudio-server-data:/home/rstudio
+      - ./rstudio_data:/home/rstudio
+    depends_on:
+      - postgres
     ports:
       - "8787:8787"
     working_dir: /home/rstudio
-    entrypoint:
-      - /usr/lib/rstudio-server/bin/rserver
-    command:
-      - --server-daemonize=0
-      - --server-app-armor-enabled=0
+    command: >
+      bash -c  "apt-get update && apt-get install -y postgresql-client && /init"
+ 
 
 volumes:
   sql_scripts:
   jupyter_notebooks:
   db-data:
-  rstudio-server-data: 
+  rstudio_data: 
