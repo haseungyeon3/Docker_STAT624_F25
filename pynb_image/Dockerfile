@@ -1,5 +1,5 @@
 FROM python:3.11.7-slim
-LABEL version="pyn1.4"
+LABEL version="pyn1.3"
 LABEL description="Python Jupyter notebook development environment"
 
 RUN apt-get update -y
